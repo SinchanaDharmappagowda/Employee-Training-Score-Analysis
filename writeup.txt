@@ -1,0 +1,23 @@
+Employee Training Score Analysis
+
+1]First i created database that is emp_training,created collection anmed as emp_train and imported the data to that collection.
+2]Using cmd executed mongo
+	-->use emp_training
+	-->show collection
+	   emp_train
+	-->db.emp_train.find().pretty();
+	   displays all data 
+3]Find the number of employees who failed in term 1 (pass mark = 37)
+	db.emp_train.find({"term1":{"$lte":37}});
+4]Find the average score of employees for term 1
+	db.emp_train.aggregate([{$group: {_id:null, AverageValue: {$avg:"$term1"} } }]);
+5]Find employees who passed in all three terms
+	db.emp_train.find({$and:[{term1:{$gt:37}},{term2:{$gt:37}},{term3:{$gt:37}}]});
+6]Find the average score of employees
+	db.emp_train.aggregate([{$project:{average:{$avg:["$term1","$term2","$term3"]}}}]);
+
+
+
+
+
+

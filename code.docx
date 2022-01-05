@@ -1,0 +1,4 @@
+db.emp_train.find({"term1":{"$lte":37}})
+db.emp_train.aggregate([{$group: {_id:null, AverageValue: {$avg:"$term1"} } }])
+db.emp_train.find({$and:[{term1:{$gt:37}},{term2:{$gt:37}},{term3:{$gt:37}}]})
+db.emp_train.aggregate([{$project:{average:{$avg:["$term1","$term2","$term3"]}}}]);
